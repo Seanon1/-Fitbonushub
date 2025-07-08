@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic User Leaderboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset & Font */
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .leaderboard-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 700px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 2.2em;
+            font-weight: 700;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .leaderboard-table th,
+        .leaderboard-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .leaderboard-table th {
+            background-color: #007bff;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .leaderboard-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .leaderboard-table tr:hover {
+            background-color: #eef;
+        }
+
+        .leaderboard-table td:first-child {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .leaderboard-table td:last-child {
+            text-align: right;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        #loading-indicator {
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #007bff;
+            display: none; /* Hidden by default */
+        }
+
+        #error-message {
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #dc3545;
+            display: none; /* Hidden by default */
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .leaderboard-container {
+                padding: 20px;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            .leaderboard-table th,
+            .leaderboard-table td {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .leaderboard-container {
+                padding: 15px;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .leaderboard-table th,
+            .leaderboard-table td {
+                padding: 8px;
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="leaderboard-container">
+        <h2>Live Global Leaderboard</h2>
+        <div id="loading-indicator">Loading leaderboard data...</div>
+        <div id="error-message"></div>
+        <table class="leaderboard-table" id="leaderboardTable">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Leaderboard data will be inserted here by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // --- Simulated Leaderboard API ---
+        // This function simulates fetching data from an API.
+        // In a real application, you would replace this with an actual `fetch()` call
+        // to your backend API endpoint.
+        function simulateLeaderboardApiCall() {
+            return new Promise((resolve, reject) => {
+                // Simulate network delay
+                setTimeout(() => {
+                    // Generate some random user data to show updates
+                    const numberOfUsers = Math.floor(Math.random() * 5) + 5; // 5 to 9 users
+                    const users = [];
+                    for (let i = 0; i < numberOfUsers; i++) {
+                        const randomScore = Math.floor(Math.random() * 5000) + 500; // Scores between 500 and 5499
+                        const randomName = `Player${Math.floor(Math.random() * 10000)}`;
+                        users.push({ name: randomName, score: randomScore });
+                    }
+
+                    // Simulate occasional errors (e.g., 10% chance of failure)
+                    if (Math.random() < 0.1) {
+                        reject(new Error('Failed to fetch leaderboard data. Please try again.'));
+                    } else {
+                        resolve(users);
+                    }
+                }, 1500); // Simulate 1.5 seconds of loading time
+            });
+        }
+
+        // --- Leaderboard Rendering Logic ---
+        const leaderboardTableBody = document.querySelector('#leaderboardTable tbody');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const errorMessage = document.getElementById('error-message');
+
+        /**
+         * Renders the leaderboard table with the given user data.
+         * @param {Array<Object>} users - An array of user objects, each with 'name' and 'score'.
+         */
+        function renderLeaderboard(users) {
+            leaderboardTableBody.innerHTML = ''; // Clear existing rows
+
+            // Sort users by score in descending order
+            users.sort((a, b) => b.score - a.score);
+
+            users.forEach((user, index) => {
+                const row = leaderboardTableBody.insertRow();
+                const rankCell = row.insertCell();
+                const nameCell = row.insertCell();
+                const scoreCell = row.insertCell();
+
+                rankCell.textContent = index + 1; // Rank starts from 1
+                nameCell.textContent = user.name;
+                scoreCell.textContent = user.score;
+            });
+        }
+
+        /**
+         * Fetches leaderboard data and updates the UI.
+         */
+        async function updateLeaderboard() {
+            loadingIndicator.style.display = 'block'; // Show loading indicator
+            errorMessage.style.display = 'none'; // Hide any previous error messages
+            errorMessage.textContent = '';
+
+            try {
+                const data = await simulateLeaderboardApiCall(); // In a real app: await fetch('/api/leaderboard').then(res => res.json());
+                renderLeaderboard(data);
+            } catch (error) {
+                console.error('Error updating leaderboard:', error);
+                errorMessage.textContent = `Error: ${error.message}`;
+                errorMessage.style.display = 'block';
+                leaderboardTableBody.innerHTML = '<tr><td colspan="3">Failed to load leaderboard.</td></tr>'; // Clear table and show message
+            } finally {
+                loadingIndicator.style.display = 'none'; // Hide loading indicator
+            }
+        }
+
+        // --- Initial Load and Constant Updates ---
+        document.addEventListener('DOMContentLoaded', () => {
+            updateLeaderboard(); // Initial load
+
+            // Set up interval to update the leaderboard every 5 seconds
+            // In a real-time scenario, you might use WebSockets for instant updates
+            // rather than polling, but polling is simpler for this demonstration.
+            setInterval(updateLeaderboard, 5000); // Update every 5 seconds (5000 milliseconds)
+        });
+    </script>
+</body>
+</html>
