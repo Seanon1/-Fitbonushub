@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitbonus Newsletter</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e0f2fe; /* Light blue background */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white shadow-2xl rounded-xl p-8 max-w-2xl w-full text-center flex flex-col items-center"> <!-- Added flex flex-col items-center here -->
+        <img src="https://placehold.co/150x150/60A5FA/FFFFFF?text=Fitbonus" alt="Fitbonus Logo" class="mx-auto mb-6 rounded-full shadow-md">
+        <h1 class="text-4xl font-extrabold text-blue-800 mb-4">Join the Fitbonus Family!</h1>
+        <p class="text-lg text-gray-700 mb-8">
+            Get exclusive fitness tips, healthy recipes, workout plans, and special offers delivered straight to your inbox.
+            Stay motivated and achieve your goals with Fitbonus!
+        </p>
+
+        <form id="newsletterForm" class="space-y-6 max-w-md w-full mx-auto"> <!-- Added w-full to ensure it takes available width before max-w-md -->
+            <div>
+                <label for="name" class="sr-only">Your Name</label>
+                <input type="text" id="name" placeholder="Your Name" required
+                       class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-base">
+            </div>
+            <div>
+                <label for="email" class="sr-only">Your Email</label>
+                <input type="email" id="email" placeholder="Your Email Address" required
+                       class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-base">
+            </div>
+            <button type="submit"
+                    class="w-full flex justify-center py-3 px-6 border border-transparent rounded-lg shadow-lg text-lg font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200 ease-in-out transform hover:scale-105">
+                Subscribe Now!
+            </button>
+        </form>
+
+        <!-- Message Box for feedback -->
+        <div id="messageBox" class="hidden mt-6 p-4 rounded-lg text-base" role="alert"></div>
+
+        <p class="text-sm text-gray-500 mt-8">We respect your privacy and will never share your email.</p>
+    </div>
+
+    <script>
+        const newsletterForm = document.getElementById('newsletterForm');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageBox = document.getElementById('messageBox');
+
+        /**
+         * Displays a message in the message box.
+         * @param {string} message - The message to display.
+         * @param {string} type - The type of message ('success', 'error', 'info').
+         */
+        function showMessage(message, type) {
+            messageBox.textContent = message;
+            messageBox.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800', 'bg-blue-100', 'text-blue-800');
+            if (type === 'success') {
+                messageBox.classList.add('bg-green-100', 'text-green-800');
+            } else if (type === 'error') {
+                messageBox.classList.add('bg-red-100', 'text-red-800');
+            } else {
+                messageBox.classList.add('bg-blue-100', 'text-blue-800');
+            }
+            setTimeout(() => {
+                messageBox.classList.add('hidden');
+            }, 5000); // Hide after 5 seconds
+        }
+
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent default form submission
+
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+
+            if (name === '' || email === '') {
+                showMessage('Please fill in all fields.', 'error');
+                return;
+            }
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showMessage('Please enter a valid email address.', 'error');
+                return;
+            }
+
+            // Simulate sending data (in a real application, you would send this to a backend service)
+            console.log(`Newsletter sign-up: Name - ${name}, Email - ${email}`);
+            showMessage('Thank you for subscribing to Fitbonus! Check your inbox soon.', 'success');
+
+            // Clear the form
+            newsletterForm.reset();
+        });
+    </script>
+</body>
+</html>

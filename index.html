@@ -38,14 +38,15 @@
 <body class="flex flex-col min-h-screen bg-gray-100 text-gray-800">
     <nav class="bg-white shadow-md sticky top-0 w-full z-20">
         <div class="container mx-auto px-6 flex justify-between items-center flex-wrap">
-            <!-- <a href="index.html" class="text-2xl font-bold text-blue-600">FitBonus</a> -->
+            <!-- <a href="index.html" class="text-2xl font-bold text-blue-600">Go green</a> -->
             <a href="index.html" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-                <span class="self-center text-2xl font-semibold whitespace-nowrap text-light text-red-500">FitBonus
+                <span class="self-center text-2xl font-semibold whitespace-nowrap text-light text-purple-500">Fitbonus
                     </span>
+                    
             </a>
             <input type="checkbox" id="menu-toggle" class="peer">
 
-            <label for="menu-toggle" class="md:hidden cursor-pointer p-2 rounded-md hover:bg-black-200">
+            <label for="menu-toggle" class="md:hidden cursor-pointer p-2 rounded-md hover:bg-gray-100">
                 <svg class="w-6 h-6 text-gray-700" fill="none" stroke-linecap="round" stroke-linejoin="round"
                     stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                     <path d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -55,31 +56,40 @@
                         md:static md:flex md:w-auto md:shadow-none md:bg-transparent md:py-0 
                         md:flex-row md:items-center md:space-x-4">
                 <a href="index.html"
-                    class="block w-full text-center md:w-auto text-light text-orange-300 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link nav-link-active">Home</a>
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link nav-link-active">Home</a>
                 <a href="about.html"
-                    class="block w-full text-center md:w-auto text-light text-orange-300 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">About us</a>
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">About</a>
                 <a href="contact.html"
-                    class="block w-full text-center md:w-auto text-light text-orange-300 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">Contact
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">Contact
                     Us</a>
                 <a href="leaderboard.html"
-                    class="block w-full text-center md:w-auto text-light text-orange-300 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">leaderboard
-                    </a>
-                     <a href="bmi.html"
-                    class="block w-full text-center md:w-auto text-light text-orange-300 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">Bmi Calculator
-                    </a>
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">Leaderboard
+                </a>
+                <a href="bmi.html"
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">Bmi Calculator
+                </a>
+                <a href="Profile.html"
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">Profile
+                </a>
             </div>
         </div>
-     </div>
+        </div>
     </nav>
 
-         <main>
+    <main>
         <!-- Hero Section -->
-        <section id="hero" class="relative bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-32 md:py-48 flex items-center justify-center min-h-screen">
-            <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('https://placehold.co/1920x1080/000000/FFFFFF?text=Gym+Background');"></div>
+        <section id="hero"
+            class="relative bg-gradient-to-r from-indigo-400 to-purple-500 text-white py-32 md:py-48 flex items-center justify-center min-h-screen">
+            <div class="absolute inset-0 bg-cover bg-center opacity-20"
+                style="background-image: url('/-Fitbonushub/pexels-leonardho-1552242.jpg');">
+            </div>
             <div class="container mx-auto text-center relative z-10 px-4">
-                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6 rounded-lg p-3 bg-white bg-opacity-10 shadow-lg">FitBonus</h1>
+                <h1
+                    class="text-5xl md:text-7xl font-extrabold leading-tight mb-6 rounded-lg p-3 bg-white bg-opacity-10 shadow-lg">
+                    FitBonus</h1>
                 <p class="text-2xl md:text-4xl font-light mb-10 italic">"Making Fitness Fun"</p>
-                <a href="#services" class="inline-block bg-white text-indigo-600 font-bold py-4 px-10 rounded-full shadow-lg hover:bg-gray-100 transform hover:scale-105 transition duration-300 ease-in-out">
+                <a href="#services"
+                    class="inline-block bg-white text-indigo-600 font-bold py-4 px-10 rounded-full shadow-lg hover:bg-gray-100 transform hover:scale-105 transition duration-300 ease-in-out">
                     Explore Our Services
                 </a>
             </div>
@@ -91,14 +101,19 @@
                 <h2 class="text-4xl font-bold text-center text-indigo-700 mb-12">About FitBonus</h2>
                 <div class="flex flex-col md:flex-row items-center gap-12">
                     <div class="md:w-1/2">
-                        <img src="https://placehold.co/600x400/A78BFA/FFFFFF?text=Happy+Gym+Members" alt="Happy gym members" class="rounded-xl shadow-lg w-full h-auto object-cover">
+                        <img src="/-Fitbonushub/pexels-yankrukov-8436544.jpg"
+                            alt="/Fitbonushub/pexels-yankrukov-8436544.jpg" class="rounded-xl shadow-lg w-full h-auto object-cover">
                     </div>
                     <div class="md:w-1/2 text-lg text-gray-700 leading-relaxed">
                         <p class="mb-4">
-                            At FitBonus, we believe that fitness should be an enjoyable journey, not a chore. Our mission is to create a vibrant and supportive community where everyone feels motivated to achieve their health goals while having a great time.
+                            At FitBonus, we believe that fitness should be an enjoyable journey, not a chore. Our
+                            mission is to create a vibrant and supportive community where everyone feels motivated to
+                            achieve their health goals while having a great time.
                         </p>
                         <p class="mb-4">
-                            We offer a unique blend of state-of-the-art equipment, diverse classes, and personalized training programs designed to cater to all fitness levels. From high-energy group sessions to serene yoga classes, there's something for everyone.
+                            We offer a unique blend of state-of-the-art equipment, diverse classes, and personalized
+                            training programs designed to cater to all fitness levels. From high-energy group sessions
+                            to serene yoga classes, there's something for everyone.
                         </p>
                         <p>
                             Join us and discover how "Making Fitness Fun" can transform your life!
@@ -114,63 +129,74 @@
                 <h2 class="text-4xl font-bold text-center text-indigo-700 mb-12">Our Services</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Service Card 1 -->
-                    <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2">
+                    <div
+                        class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2">
                         <div class="text-indigo-600 mb-4 text-5xl text-center">
                             🏋️
                         </div>
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 text-center">Modern Equipment</h3>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 text-center">Modern excercise plans</h3>
                         <p class="text-gray-700 text-center">
-                            Access to a wide range of cutting-edge cardio and strength training machines to help you reach your peak performance.
+                            Access to a wide range of excercise plans custom tailored for different people to utilise and see growth 
+                            .
                         </p>
                     </div>
                     <!-- Service Card 2 -->
-                    <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2">
+                    <div
+                        class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2">
                         <div class="text-indigo-600 mb-4 text-5xl text-center">
                             🧘
                         </div>
                         <h3 class="text-2xl font-semibold text-gray-900 mb-4 text-center">Group Classes</h3>
                         <p class="text-gray-700 text-center">
-                            Join our energetic group classes including Zumba, Yoga, Spin, HIIT, and more, led by certified instructors.
+                            Join our energetic group classes including Zumba, Yoga, and more, led by
+                            certified instructors.
                         </p>
                     </div>
                     <!-- Service Card 3 -->
-                    <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2">
+                    <div
+                        class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2">
                         <div class="text-indigo-600 mb-4 text-5xl text-center">
                             💪
                         </div>
                         <h3 class="text-2xl font-semibold text-gray-900 mb-4 text-center">Personal Training</h3>
                         <p class="text-gray-700 text-center">
-                            Get personalized attention and custom workout plans from our expert personal trainers to accelerate your results.
+                            Get personalized attention and custom workout plans from our expert personal trainers to
+                            accelerate your results.
                         </p>
                     </div>
                     <!-- Service Card 4 -->
-                    <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2">
+                    <div
+                        class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2">
                         <div class="text-indigo-600 mb-4 text-5xl text-center">
                             🍎
                         </div>
                         <h3 class="text-2xl font-semibold text-gray-900 mb-4 text-center">Nutrition Guidance</h3>
                         <p class="text-gray-700 text-center">
-                            Complement your workouts with professional nutrition advice and meal planning to optimize your health.
+                            Complement your workouts with professional nutrition advice and meal planning to optimize
+                            your health.
                         </p>
                     </div>
                     <!-- Service Card 5 -->
-                    <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2">
+                    <div
+                        class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2">
                         <div class="text-indigo-600 mb-4 text-5xl text-center">
-                            🏊
+                            🤝
                         </div>
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 text-center">Swimming Pool Access</h3>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 text-center">Active Community</h3>
                         <p class="text-gray-700 text-center">
-                            Enjoy our pristine swimming pool for laps, water aerobics, or simply to relax and unwind.
+                                Which keeps people,active and helps new members to grow.
                         </p>
                     </div>
                     <!-- Service Card 6 -->
-                    <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2">
+                    <div
+                        class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2">
                         <div class="text-indigo-600 mb-4 text-5xl text-center">
-                            🧖
+                            📝
                         </div>
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 text-center">Sauna & Steam Room</h3>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 text-center">Personal Journal</h3>
                         <p class="text-gray-700 text-center">
-                            Relax and recover after your workout in our luxurious sauna and steam room facilities.
+                            Which helps to track one's personal journey to check whether daily goals were met or not and where to improve 
+                            by setting new plans.
                         </p>
                     </div>
                 </div>
@@ -185,10 +211,12 @@
                     <!-- Testimonial Card 1 -->
                     <div class="bg-white p-8 rounded-xl shadow-lg">
                         <p class="text-gray-700 italic mb-6">
-                            "FitBonus has completely changed my perspective on fitness! The classes are so engaging, and the trainers are incredibly supportive. I actually look forward to my workouts now."
+                            "FitBonus has completely changed my perspective on fitness! The personalized plans are so engaging, and
+                            the trainers are incredibly supportive. I actually look forward to my workouts now."
                         </p>
                         <div class="flex items-center">
-                            <img src="https://placehold.co/60x60/6B7280/FFFFFF?text=JD" alt="John Doe" class="w-16 h-16 rounded-full mr-4 object-cover">
+                            <img src="https://placehold.co/60x60/6B7280/FFFFFF?text=JD" alt="John Doe"
+                                class="w-16 h-16 rounded-full mr-4 object-cover">
                             <div>
                                 <p class="font-semibold text-gray-900">John Doe</p>
                                 <p class="text-sm text-gray-600">Long-term Member</p>
@@ -198,10 +226,13 @@
                     <!-- Testimonial Card 2 -->
                     <div class="bg-white p-8 rounded-xl shadow-lg">
                         <p class="text-gray-700 italic mb-6">
-                            "I've tried many gyms, but FitBonus stands out. The atmosphere is fantastic, and the equipment is top-notch. Plus, the community events make it more than just a gym."
+                            "I've tried many fitness websites, but FitBonus stands out. The design is fantastic, and the
+                            trainers and staff are helpful. Plus, the community events make it more than just a regular
+                            fitness website."
                         </p>
                         <div class="flex items-center">
-                            <img src="https://placehold.co/60x60/6B7280/FFFFFF?text=JS" alt="Jane Smith" class="w-16 h-16 rounded-full mr-4 object-cover">
+                            <img src="https://placehold.co/60x60/6B7280/FFFFFF?text=JS" alt="Jane Smith"
+                                class="w-16 h-16 rounded-full mr-4 object-cover">
                             <div>
                                 <p class="font-semibold text-gray-900">Jane Smith</p>
                                 <p class="text-sm text-gray-600">New Member</p>
@@ -213,13 +244,14 @@
         </section>
 
         <!-- Call to Action / Membership Section -->
-        <section class="bg-indigo-600 text-white py-20">
+        <section class="bg-purple-600 text-white py-20">
             <div class="container mx-auto text-center px-6 md:px-12">
                 <h2 class="text-4xl font-bold mb-6">Ready to Make Fitness Fun?</h2>
                 <p class="text-xl mb-10">
                     Join the FitBonus family today and start your journey towards a healthier, happier you!
                 </p>
-                <a href="#contact" class="inline-block bg-white text-indigo-600 font-bold py-4 px-10 rounded-full shadow-lg hover:bg-gray-100 transform hover:scale-105 transition duration-300 ease-in-out">
+                <a href="#contact"
+                    class="inline-block bg-white text-indigo-600 font-bold py-4 px-10 rounded-full shadow-lg hover:bg-gray-100 transform hover:scale-105 transition duration-300 ease-in-out">
                     Sign Up Now!
                 </a>
             </div>
@@ -228,24 +260,32 @@
         <!-- Contact Section -->
         <section id="contact" class="py-20 bg-white">
             <div class="container mx-auto px-6 md:px-12">
-                <h2 class="text-4xl font-bold text-center text-indigo-700 mb-12">Contact Us</h2>
+                <h2 class="text-4xl font-bold text-center text-purple-700 mb-12">Contact Us</h2>
                 <div class="flex flex-col md:flex-row gap-12 items-start">
                     <div class="md:w-1/2 bg-gray-50 p-8 rounded-xl shadow-lg">
                         <h3 class="text-2xl font-semibold text-gray-900 mb-6">Get in Touch</h3>
                         <form class="space-y-6">
                             <div>
                                 <label for="name" class="block text-gray-700 text-lg font-medium mb-2">Name</label>
-                                <input type="text" id="name" name="name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200" placeholder="Your Name">
+                                <input type="text" id="name" name="name"
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200"
+                                    placeholder="Your Name">
                             </div>
                             <div>
                                 <label for="email" class="block text-gray-700 text-lg font-medium mb-2">Email</label>
-                                <input type="email" id="email" name="email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200" placeholder="Your Email">
+                                <input type="email" id="email" name="email"
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200"
+                                    placeholder="Your Email">
                             </div>
                             <div>
-                                <label for="message" class="block text-gray-700 text-lg font-medium mb-2">Message</label>
-                                <textarea id="message" name="message" rows="5" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200" placeholder="Your Message"></textarea>
+                                <label for="message"
+                                    class="block text-gray-700 text-lg font-medium mb-2">Message</label>
+                                <textarea id="message" name="message" rows="5"
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200"
+                                    placeholder="Your Message"></textarea>
                             </div>
-                            <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-indigo-700 transform hover:scale-105 transition duration-300 ease-in-out">
+                            <button type="submit"
+                                class="w-full bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-indigo-700 transform hover:scale-105 transition duration-300 ease-in-out">
                                 Send Message
                             </button>
                         </form>
@@ -263,7 +303,8 @@
                         </p>
                         <div class="mt-8">
                             <!-- Placeholder for a map or image -->
-                            <img src="https://placehold.co/600x300/E0F2F7/000000?text=Gym+Location+Map" alt="Gym Location" class="rounded-lg shadow-md w-full h-auto object-cover">
+                            <img src="/-Fitbonushub\HILmr.png"
+                                alt="Gym Location" class="rounded-lg shadow-md w-full h-auto object-cover">
                         </div>
                     </div>
                 </div>
@@ -271,8 +312,9 @@
         </section>
     </main>
 
+   
     <!-- Footer Section -->
-    <footer class="bg-gray-800 text-white py-10">
+    <footer class="bg-purple-500 text-white py-10">
         <div class="container mx-auto text-center px-6 md:px-12">
             <div class="flex flex-col md:flex-row justify-between items-center mb-8">
                 <div class="mb-4 md:mb-0">
@@ -280,12 +322,15 @@
                     <p class="text-sm text-gray-400">Making Fitness Fun</p>
                 </div>
                 <div class="flex space-x-6">
-                    <a href="#" class="text-gray-300 hover:text-indigo-400 transition duration-300 ease-in-out">Facebook</a>
-                    <a href="#" class="text-gray-300 hover:text-indigo-400 transition duration-300 ease-in-out">Instagram</a>
-                    <a href="#" class="text-gray-300 hover:text-indigo-400 transition duration-300 ease-in-out">Twitter</a>
+                    <a href="#"
+                        class="text-black-300 hover:text-indigo-400 transition duration-300 ease-in-out">Facebook</a>
+                    <a href="#"
+                        class="text-black-300 hover:text-indigo-400 transition duration-300 ease-in-out">Instagram</a>
+                    <a href="#"
+                        class="text-black-300 hover:text-indigo-400 transition duration-300 ease-in-out">Twitter</a>
                 </div>
             </div>
-            <p class="text-gray-400 text-sm">&copy; 2025 FitBonus. All rights reserved.</p>
+            <p class="text-black-400 text-sm">&copy; 2025 FitBonus. All rights reserved.</p>
         </div>
     </footer>
 
@@ -337,18 +382,12 @@
                 document.body.style.overflow = '';
             }
         }
-    </script> 
+    </script>
 
     <footer class="bg-gray-100 rounded-lg shadow-sm">
         <di class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
             <div class="sm:flex sm:items-center sm:justify-between">
-                <a href="index.html" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-                
-               
-           
-           
-        
-
+                <a href="index.html" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"></a>
     </footer>
 
 
