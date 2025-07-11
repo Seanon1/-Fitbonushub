@@ -4,9 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic User Leaderboard</title>
+    <title>Leaderboard - Fitbonus</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-     <style>
+
+    <style>
+        /* Navbar specific styles */
         body {
             font-family: 'Inter', sans-serif;
         }
@@ -27,24 +30,9 @@
 
         .hero-bg {
             background-image: linear-gradient(to right, rgba(59, 130, 246, 0.8), rgba(37, 99, 235, 0.9));
-
-        }
-    </style>
-   
-   <style>
-        /* Basic Reset & Font */
-        body {
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f0f2f5;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
         }
 
+        /* Leaderboard specific styles */
         .leaderboard-container {
             background-color: #fff;
             padding: 30px;
@@ -153,25 +141,68 @@
         }
     </style>
 </head>
-<body>
 
-    <div class="leaderboard-container">
-        <h2>Live Global Leaderboard</h2>
-        <div id="loading-indicator">Loading leaderboard data...</div>
-        <div id="error-message"></div>
-        <table class="leaderboard-table" id="leaderboardTable">
-            <thead>
-                <tr>
-                    <th>Rank</th>
-                    <th>Name</th>
-                    <th>Score</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Leaderboard data will be inserted here by JavaScript -->
-            </tbody>
-        </table>
-    </div>
+<body class="flex flex-col min-h-screen bg-gray-100 text-gray-800">
+    <nav class="bg-white shadow-md sticky top-0 w-full z-20">
+        <div class="container mx-auto px-6 flex justify-between items-center flex-wrap">
+            <a href="index.html" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+                <span class="self-center text-2xl font-semibold whitespace-nowrap text-light text-purple-500">Fitbonus
+                </span>
+            </a>
+            <input type="checkbox" id="menu-toggle" class="peer">
+
+            <label for="menu-toggle" class="md:hidden cursor-pointer p-2 rounded-md hover:bg-gray-100">
+                <svg class="w-6 h-6 text-gray-700" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                    <path d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </label>
+            <div id="menu-links" class="hidden w-full bg-white shadow-md py-2 flex-col
+                        md:static md:flex md:w-auto md:shadow-none md:bg-transparent md:py-0 
+                        md:flex-row md:items-center md:space-x-4">
+                <a href="index.html"
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">Home</a>
+                <a href="about.html"
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">About</a>
+                <a href="referral-page.html"
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">Referral-page
+                    </a>
+                <a href="leaderboard.html"
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link nav-link-active">Leaderboard
+                </a>
+                <a href="bmi.html"
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">Bmi
+                    Calculator
+                </a>
+                <a href="login.html"
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">Login
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow container mx-auto px-6 py-12 flex items-start justify-center">
+        <div class="leaderboard-container">
+            <h2>Live Global Leaderboard</h2>
+            <div id="loading-indicator">Loading leaderboard data...</div>
+            <div id="error-message"></div>
+            <table class="leaderboard-table" id="leaderboardTable">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Name</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center p-4 mt-auto w-full">
+        &copy; 2025 Fitbonus. All rights reserved.
+    </footer>
 
     <script>
         // --- Simulated Leaderboard API ---
@@ -183,12 +214,15 @@
                 // Simulate network delay
                 setTimeout(() => {
                     // Generate some random user data to show updates
-                    const numberOfUsers = Math.floor(Math.random() * 5) + 5; // 5 to 9 users
+                    const numberOfUsers = Math.floor(Math.random() * 10) + 10; // 10 to 20 users
                     const users = [];
                     for (let i = 0; i < numberOfUsers; i++) {
-                        const randomScore = Math.floor(Math.random() * 5000) + 500; // Scores between 500 and 5499
+                        const randomScore = Math.floor(Math.random() * 100000) + 10000; // Scores between 10000 and 100000
                         const randomName = `Player${Math.floor(Math.random() * 10000)}`;
-                        users.push({ name: randomName, score: randomScore });
+                        users.push({
+                            name: randomName,
+                            score: randomScore
+                        });
                     }
 
                     // Simulate occasional errors (e.g., 10% chance of failure)
