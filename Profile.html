@@ -1,329 +1,340 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Fitness Journal</title>
+    <title>Personal Journal - Fitbonus</title>
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (e.g., save icon) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
+        /* Base body and font styles */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8; /* Light gray background */
         }
-        /* Custom scrollbar for better aesthetics */
-        ::-webkit-scrollbar {
-            width: 8px;
+
+        /* Navigation specific styles */
+        #menu-toggle {
+            display: none;
         }
-        ::-webkit-scrollbar-track {
-            background: #e2e8f0; /* Light track */
-            border-radius: 10px;
+
+        #menu-toggle:checked+label+div#menu-links {
+            display: flex;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #60a5fa; /* Blue thumb */
-            border-radius: 10px;
+
+        .nav-link-active {
+            border-bottom-width: 2px;
+            border-bottom-color: #3b82f6;
+            color: #3b82f6;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #3b82f6; /* Darker blue on hover */
+
+        .hero-bg {
+            background-image: linear-gradient(to right, rgba(59, 130, 246, 0.8), rgba(37, 99, 235, 0.9));
+        }
+
+        /* Custom styles for journal page elements */
+        .journal-card {
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 48rem; /* Wider for journal entries */
+        }
+
+        .journal-textarea {
+            min-height: 150px;
+            resize: vertical;
+            background-color: #f3f4f6;
+            border: 1px solid #d1d5db;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            color: #4b5563;
+        }
+
+        .save-button {
+            background-color: #8b5cf6;
+            /* Purple */
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out;
+            box-shadow: 0 4px 6px rgba(139, 92, 246, 0.3);
+        }
+
+        .save-button:hover {
+            background-color: #7c3aed;
+        }
+
+        .save-button:active {
+            transform: translateY(1px);
+        }
+
+        .message-box {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .message-box.success {
+            background-color: #d1fae5;
+            /* Green-100 */
+            color: #065f46;
+            /* Green-800 */
+        }
+
+        .message-box.error {
+            background-color: #fee2e2;
+            /* Red-100 */
+            color: #991b1b;
+            /* Red-800 */
+        }
+
+        .journal-entry {
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .journal-entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #4b5563;
+        }
+
+        .journal-entry-content {
+            white-space: pre-wrap; /* Preserves whitespace and wraps text */
+            color: #374151;
+        }
+
+        .delete-entry-btn {
+            background: none;
+            border: none;
+            color: #ef4444; /* Red-500 */
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .delete-entry-btn:hover {
+            color: #dc2626; /* Red-600 */
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4">
-    <div class="bg-white shadow-xl rounded-xl p-8 max-w-4xl w-full flex flex-col md:flex-row gap-8">
-        <!-- Journal Entry Form -->
-        <div class="md:w-1/2">
-            <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">My Fitness Journey</h1>
 
-            <!-- User ID Display -->
-            <div class="bg-blue-100 border border-blue-200 text-blue-800 px-4 py-2 rounded-lg mb-6 text-sm">
-                Your User ID: <span id="userIdDisplay" class="font-mono text-blue-900 break-all">Loading...</span>
+<body class="flex flex-col min-h-screen bg-gray-100 text-gray-800">
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md sticky top-0 w-full z-20">
+        <div class="container mx-auto px-6 flex justify-between items-center flex-wrap">
+            <a href="index.html" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+                <span class="self-center text-2xl font-semibold whitespace-nowrap text-light text-purple-500">Fitbonus
+                </span>
+            </a>
+            <input type="checkbox" id="menu-toggle" class="peer">
+
+            <label for="menu-toggle" class="md:hidden cursor-pointer p-2 rounded-md hover:bg-gray-100">
+                <svg class="w-6 h-6 text-gray-700" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                    <path d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </label>
+            <div id="menu-links" class="hidden w-full bg-white shadow-md py-2 flex-col
+                        md:static md:flex md:w-auto md:shadow-none md:bg-transparent md:py-0
+                        md:flex-row md:items-center md:space-x-4">
+                <a href="index.html"
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">Home</a>
+                <a href="about.html"
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">About</a>
+                <a href="contact.html"
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">Contact
+                    Us</a>
+                <a href="leaderboard.html"
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">Leaderboard
+                </a>
+                <a href="bmi.html"
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">Bmi
+                    Calculator
+                </a>
+                <a href="login.html"
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">Login
+                </a>
+                <a href="referral.html"
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link">Referral</a>
+                <a href="journal.html"
+                    class="block w-full text-center md:w-auto text-light text-purple-500 hover:text-blue-600 px-3 py-3 md:py-2 rounded-md text-sm font-medium nav-link nav-link-active">Journal</a>
             </div>
+        </div>
+    </nav>
 
-            <form id="journalForm" class="space-y-4">
-                <div>
-                    <label for="entryDate" class="block text-sm font-medium text-gray-700 mb-1">Date</label>
-                    <input type="date" id="entryDate" required
-                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                </div>
-                <div>
-                    <label for="entryTitle" class="block text-sm font-medium text-gray-700 mb-1">Title</label>
-                    <input type="text" id="entryTitle" placeholder="e.g., Leg Day Domination!" required
-                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                </div>
-                <div>
-                    <label for="entryContent" class="block text-sm font-medium text-gray-700 mb-1">Entry</label>
-                    <textarea id="entryContent" rows="6" placeholder="Document your workout, diet, feelings..." required
-                              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm resize-y"></textarea>
-                </div>
-                <button type="submit" id="saveButton"
-                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out">
-                    Add Journal Entry
+    <!-- Main Content Area for Journal Page -->
+    <main class="flex-grow container mx-auto px-6 py-12 flex flex-col items-center justify-start">
+        <div class="journal-card text-center mb-8">
+            <h1 class="text-3xl font-bold text-blue-600 mb-4">Your Personal Fitness Journal</h1>
+            <p class="text-gray-600 mb-6">Track your workouts, reflect on your progress, and jot down your thoughts.
+                Every entry helps you stay motivated!</p>
+
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-purple-700 mb-3 text-left">New Journal Entry</h2>
+                <textarea id="journalEntryTextarea"
+                    class="journal-textarea w-full mb-4 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    placeholder="What's on your mind today? How was your workout?"></textarea>
+                <button id="saveEntryBtn" class="save-button w-full flex items-center justify-center gap-2">
+                    <i class="fas fa-save"></i> Save Entry
                 </button>
-            </form>
-            <!-- Message Box for alerts -->
-            <div id="messageBox" class="hidden mt-4 p-3 rounded-md text-sm text-center" role="alert"></div>
-        </div>
-
-        <!-- Journal Entries Display -->
-        <div class="md:w-1/2 border-t md:border-t-0 md:border-l border-gray-200 pt-8 md:pt-0 md:pl-8">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Your Entries</h2>
-            <div id="journalEntries" class="space-y-4 max-h-96 overflow-y-auto pr-2">
-                <!-- Journal entries will be loaded here -->
-                <p class="text-gray-500 text-center" id="loadingMessage">Loading entries...</p>
+                <div id="journalMessage" class="message-box hidden"></div>
             </div>
-        </div>
-    </div>
 
-    <!-- Confirmation Modal -->
-    <div id="confirmationModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden">
-        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-sm">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Confirm Deletion</h3>
-            <p class="text-gray-700 mb-6">Are you sure you want to delete this entry?</p>
-            <div class="flex justify-end space-x-3">
-                <button id="cancelDelete" class="px-4 py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-50">Cancel</button>
-                <button id="confirmDelete" class="px-4 py-2 rounded-md bg-red-600 text-white hover:bg-red-700">Delete</button>
-            </div>
-        </div>
-    </div>
-
-    <script type="module">
-        // Firebase imports
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // Global variables for Firebase config and app ID
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-        // Firebase App initialization
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-
-        let userId = null; // To store the current user's ID
-        let currentEditingDocId = null; // To store the ID of the document being edited/deleted
-
-        const journalForm = document.getElementById('journalForm');
-        const entryDateInput = document.getElementById('entryDate');
-        const entryTitleInput = document.getElementById('entryTitle');
-        const entryContentInput = document.getElementById('entryContent');
-        const journalEntriesDiv = document.getElementById('journalEntries');
-        const saveButton = document.getElementById('saveButton');
-        const messageBox = document.getElementById('messageBox');
-        const userIdDisplay = document.getElementById('userIdDisplay');
-        const loadingMessage = document.getElementById('loadingMessage');
-
-        const confirmationModal = document.getElementById('confirmationModal');
-        const confirmDeleteButton = document.getElementById('confirmDelete');
-        const cancelDeleteButton = document.getElementById('cancelDelete');
-
-        /**
-         * Displays a message in the message box.
-         * @param {string} message - The message to display.
-         * @param {string} type - The type of message ('success', 'error', 'info').
-         */
-        function showMessage(message, type) {
-            messageBox.textContent = message;
-            messageBox.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800', 'bg-blue-100', 'text-blue-800');
-            if (type === 'success') {
-                messageBox.classList.add('bg-green-100', 'text-green-800');
-            } else if (type === 'error') {
-                messageBox.classList.add('bg-red-100', 'text-red-800');
-            } else {
-                messageBox.classList.add('bg-blue-100', 'text-blue-800');
-            }
-            setTimeout(() => {
-                messageBox.classList.add('hidden');
-            }, 3000); // Hide after 3 seconds
-        }
-
-        /**
-         * Renders a single journal entry HTML element.
-         * @param {Object} entry - The journal entry object from Firestore.
-         * @param {string} entry.id - The document ID of the entry.
-         * @param {string} entry.date - The date of the entry.
-         * @param {string} entry.title - The title of the entry.
-         * @param {string} entry.content - The content of the entry.
-         * @returns {HTMLElement} The created journal entry div element.
-         */
-        function createJournalEntryElement(entry) {
-            const entryDiv = document.createElement('div');
-            entryDiv.id = `entry-${entry.id}`;
-            entryDiv.classList.add('bg-gray-50', 'p-4', 'rounded-lg', 'shadow-sm', 'border', 'border-gray-200');
-
-            entryDiv.innerHTML = `
-                <div class="flex justify-between items-start mb-2">
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-800">${entry.title}</h3>
-                        <p class="text-sm text-gray-500">${entry.date}</p>
-                    </div>
-                    <div class="flex space-x-2">
-                        <button class="edit-btn p-1 rounded-full hover:bg-blue-200 transition duration-150 ease-in-out" data-id="${entry.id}" title="Edit">
-                            <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zm-3.586 3.586l-7.793 7.793V17h2.828l7.793-7.793-2.828-2.828z"></path></svg>
-                        </button>
-                        <button class="delete-btn p-1 rounded-full hover:bg-red-200 transition duration-150 ease-in-out" data-id="${entry.id}" title="Delete">
-                            <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm6 0a1 1 0 11-2 0v6a1 1 0 112 0V8z" clip-rule="evenodd"></path></svg>
-                        </button>
+            <div>
+                <h2 class="text-xl font-semibold text-purple-700 mb-3 text-left">Past Entries</h2>
+                <div id="pastEntriesContainer" class="bg-gray-50 p-4 rounded-md shadow-inner max-h-96 overflow-y-auto">
+                    <div id="journalEntriesList">
+                        <!-- Journal entries will be dynamically loaded here -->
+                        <p class="text-gray-500 text-center">No journal entries yet. Start writing!</p>
                     </div>
                 </div>
-                <p class="text-gray-700 whitespace-pre-wrap">${entry.content}</p>
-            `;
+            </div>
+        </div>
+    </main>
 
-            // Attach event listeners for edit and delete buttons
-            entryDiv.querySelector('.edit-btn').addEventListener('click', () => editEntry(entry.id, entry));
-            entryDiv.querySelector('.delete-btn').addEventListener('click', () => showDeleteConfirmation(entry.id));
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center p-4 mt-auto w-full">
+        &copy; 2025 Fitbonus. All rights reserved.
+    </footer>
 
-            return entryDiv;
-        }
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const journalEntryTextarea = document.getElementById('journalEntryTextarea');
+            const saveEntryBtn = document.getElementById('saveEntryBtn');
+            const journalMessage = document.getElementById('journalMessage');
+            const journalEntriesList = document.getElementById('journalEntriesList');
 
-        /**
-         * Populates the form with entry data for editing.
-         * @param {string} docId - The ID of the document to edit.
-         * @param {Object} entryData - The data of the entry to edit.
-         */
-        function editEntry(docId, entryData) {
-            currentEditingDocId = docId;
-            entryDateInput.value = entryData.date;
-            entryTitleInput.value = entryData.title;
-            entryContentInput.value = entryData.content;
-            saveButton.textContent = 'Update Journal Entry';
-            saveButton.classList.remove('bg-blue-600', 'hover:bg-blue-700');
-            saveButton.classList.add('bg-green-600', 'hover:bg-green-700');
-            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top to see the form
-        }
+            // --- Data Storage ---
+            // Using localStorage to persist journal entries.
+            // Each entry will be an object: { id: uniqueId, timestamp: ISOString, content: string }
+            let journalEntries = JSON.parse(localStorage.getItem('fitbonusJournalEntries')) || [];
 
-        /**
-         * Shows the delete confirmation modal.
-         * @param {string} docId - The ID of the document to delete.
-         */
-        function showDeleteConfirmation(docId) {
-            currentEditingDocId = docId;
-            confirmationModal.classList.remove('hidden');
-        }
+            // --- Functions ---
 
-        /**
-         * Hides the delete confirmation modal.
-         */
-        function hideDeleteConfirmation() {
-            confirmationModal.classList.add('hidden');
-            currentEditingDocId = null;
-        }
+            /**
+             * Displays a temporary message in a given element.
+             * @param {HTMLElement} element - The DOM element to display the message in.
+             * @param {string} message - The message text.
+             * @param {string} type - 'success' or 'error' for styling.
+             */
+            function displayMessage(element, message, type) {
+                element.textContent = message;
+                element.className = `message-box ${type}`; // Apply base and type-specific classes
+                element.classList.remove('hidden');
 
-        // Event listener for confirming deletion
-        confirmDeleteButton.addEventListener('click', async () => {
-            if (currentEditingDocId && userId) {
-                try {
-                    const docRef = doc(db, `artifacts/${appId}/users/${userId}/fitnessJournal`, currentEditingDocId);
-                    await deleteDoc(docRef);
-                    showMessage('Entry deleted successfully!', 'success');
-                } catch (e) {
-                    console.error("Error deleting document: ", e);
-                    showMessage('Error deleting entry.', 'error');
-                } finally {
-                    hideDeleteConfirmation();
+                // Hide message after a few seconds
+                setTimeout(() => {
+                    element.classList.add('hidden');
+                }, 3000);
+            }
+
+            /**
+             * Renders the list of journal entries.
+             */
+            function renderJournalEntries() {
+                journalEntriesList.innerHTML = ''; // Clear existing list
+
+                if (journalEntries.length === 0) {
+                    const p = document.createElement('p');
+                    p.className = 'text-gray-500 text-center';
+                    p.textContent = 'No journal entries yet. Start writing!';
+                    journalEntriesList.appendChild(p);
+                    return;
                 }
-            }
-        });
 
-        // Event listener for canceling deletion
-        cancelDeleteButton.addEventListener('click', hideDeleteConfirmation);
+                // Sort entries by timestamp in descending order (newest first)
+                journalEntries.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
-        /**
-         * Handles form submission for adding or updating a journal entry.
-         */
-        journalForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+                journalEntries.forEach(entry => {
+                    const entryDiv = document.createElement('div');
+                    entryDiv.className = 'journal-entry';
+                    entryDiv.dataset.id = entry.id; // Store ID for deletion
 
-            if (!userId) {
-                showMessage('Authentication not ready. Please wait.', 'error');
-                return;
-            }
+                    const headerDiv = document.createElement('div');
+                    headerDiv.className = 'journal-entry-header';
 
-            const entryData = {
-                date: entryDateInput.value,
-                title: entryTitleInput.value,
-                content: entryContentInput.value,
-                timestamp: new Date() // Add a timestamp for ordering
-            };
+                    const dateSpan = document.createElement('span');
+                    dateSpan.textContent = new Date(entry.timestamp).toLocaleString();
+                    headerDiv.appendChild(dateSpan);
 
-            try {
-                if (currentEditingDocId) {
-                    // Update existing entry
-                    const docRef = doc(db, `artifacts/${appId}/users/${userId}/fitnessJournal`, currentEditingDocId);
-                    await updateDoc(docRef, entryData);
-                    showMessage('Entry updated successfully!', 'success');
-                    currentEditingDocId = null; // Reset editing state
-                    saveButton.textContent = 'Add Journal Entry';
-                    saveButton.classList.remove('bg-green-600', 'hover:bg-green-700');
-                    saveButton.classList.add('bg-blue-600', 'hover:bg-blue-700');
-                } else {
-                    // Add new entry
-                    const colRef = collection(db, `artifacts/${appId}/users/${userId}/fitnessJournal`);
-                    await addDoc(colRef, entryData);
-                    showMessage('Entry added successfully!', 'success');
-                }
-                // Clear the form after saving
-                journalForm.reset();
-                entryDateInput.value = new Date().toISOString().split('T')[0]; // Set today's date by default
-            } catch (e) {
-                console.error("Error adding/updating document: ", e);
-                showMessage('Error saving entry.', 'error');
-            }
-        });
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.className = 'delete-entry-btn';
+                    deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
+                    deleteBtn.addEventListener('click', () => deleteJournalEntry(entry.id));
+                    headerDiv.appendChild(deleteBtn);
 
-        // Set today's date as default for the date input
-        entryDateInput.value = new Date().toISOString().split('T')[0];
+                    const contentP = document.createElement('p');
+                    contentP.className = 'journal-entry-content';
+                    contentP.textContent = entry.content;
 
-        // Firebase Authentication and Firestore Listener
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                userId = user.uid;
-                userIdDisplay.textContent = userId;
-                console.log("Authenticated with userId:", userId);
-
-                // Set up real-time listener for journal entries
-                const q = query(collection(db, `artifacts/${appId}/users/${userId}/fitnessJournal`), orderBy("timestamp", "desc"));
-
-                onSnapshot(q, (snapshot) => {
-                    journalEntriesDiv.innerHTML = ''; // Clear existing entries
-                    loadingMessage.classList.add('hidden'); // Hide loading message
-                    if (snapshot.empty) {
-                        journalEntriesDiv.innerHTML = '<p class="text-gray-500 text-center">No entries yet. Start documenting your journey!</p>';
-                    } else {
-                        snapshot.forEach((doc) => {
-                            const entry = { id: doc.id, ...doc.data() };
-                            const entryElement = createJournalEntryElement(entry);
-                            journalEntriesDiv.appendChild(entryElement);
-                        });
-                    }
-                }, (error) => {
-                    console.error("Error fetching journal entries: ", error);
-                    showMessage('Error loading entries.', 'error');
-                    loadingMessage.textContent = 'Failed to load entries.';
+                    entryDiv.appendChild(headerDiv);
+                    entryDiv.appendChild(contentP);
+                    journalEntriesList.appendChild(entryDiv);
                 });
-
-            } else {
-                // Not signed in, attempt to sign in anonymously or with custom token
-                try {
-                    if (initialAuthToken) {
-                        await signInWithCustomToken(auth, initialAuthToken);
-                        console.log("Signed in with custom token.");
-                    } else {
-                        await signInAnonymously(auth);
-                        console.log("Signed in anonymously.");
-                    }
-                } catch (error) {
-                    console.error("Error during authentication:", error);
-                    showMessage('Failed to authenticate. Please try again.', 'error');
-                    userIdDisplay.textContent = 'Authentication Failed';
-                    loadingMessage.textContent = 'Authentication required to load entries.';
-                }
             }
+
+            /**
+             * Saves a new journal entry.
+             */
+            function saveJournalEntry() {
+                const content = journalEntryTextarea.value.trim();
+
+                if (!content) {
+                    displayMessage(journalMessage, 'Journal entry cannot be empty.', 'error');
+                    return;
+                }
+
+                const newEntry = {
+                    id: Date.now().toString(), // Simple unique ID
+                    timestamp: new Date().toISOString(),
+                    content: content
+                };
+
+                journalEntries.push(newEntry);
+                localStorage.setItem('fitbonusJournalEntries', JSON.stringify(journalEntries));
+
+                displayMessage(journalMessage, 'Journal entry saved successfully!', 'success');
+                journalEntryTextarea.value = ''; // Clear textarea
+                renderJournalEntries(); // Update the list
+            }
+
+            /**
+             * Deletes a journal entry by its ID.
+             * @param {string} id - The ID of the entry to delete.
+             */
+            function deleteJournalEntry(id) {
+                journalEntries = journalEntries.filter(entry => entry.id !== id);
+                localStorage.setItem('fitbonusJournalEntries', JSON.stringify(journalEntries));
+                displayMessage(journalMessage, 'Journal entry deleted.', 'success');
+                renderJournalEntries(); // Re-render the list
+            }
+
+
+            // --- Event Listeners ---
+            saveEntryBtn.addEventListener('click', saveJournalEntry);
+
+            // Initial render of journal entries
+            renderJournalEntries();
         });
     </script>
 </body>
+
 </html>
